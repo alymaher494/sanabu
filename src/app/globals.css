@@ -1,0 +1,284 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-open-sans);
+  --font-display: var(--font-montserrat);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+
+  /* Sam Bau brand colors */
+  --color-gold: var(--gold);
+  --color-gold-dark: var(--gold-dark);
+  --color-gold-light: var(--gold-light);
+  --color-charcoal: var(--charcoal);
+  --color-charcoal-soft: var(--charcoal-soft);
+  --color-cream: var(--cream);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --radius: 0.5rem;
+
+  /* Sam Bau Brand Palette */
+  --gold: #d4a017;        /* Primary brand gold/ochre */
+  --gold-dark: #b8860b;    /* Deep amber/bronze */
+  --gold-light: #e6b838;   /* Lighter gold for hovers */
+  --charcoal: #1a1a1a;     /* Deep charcoal background */
+  --charcoal-soft: #262626;/* Slightly lighter charcoal */
+  --cream: #fdfbf7;        /* Warm off-white background */
+
+  --background: #fdfbf7;
+  --foreground: #1a1a1a;
+  --card: #ffffff;
+  --card-foreground: #1a1a1a;
+  --popover: #ffffff;
+  --popover-foreground: #1a1a1a;
+  --primary: #d4a017;
+  --primary-foreground: #1a1a1a;
+  --secondary: #f5f2ea;
+  --secondary-foreground: #1a1a1a;
+  --muted: #f5f2ea;
+  --muted-foreground: #6b6b6b;
+  --accent: #d4a017;
+  --accent-foreground: #1a1a1a;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: #e7e2d6;
+  --input: #e7e2d6;
+  --ring: #d4a017;
+  --chart-1: #d4a017;
+  --chart-2: #b8860b;
+  --chart-3: #262626;
+  --chart-4: #e6b838;
+  --chart-5: #6b6b6b;
+  --sidebar: #fdfbf7;
+  --sidebar-foreground: #1a1a1a;
+  --sidebar-primary: #d4a017;
+  --sidebar-primary-foreground: #1a1a1a;
+  --sidebar-accent: #f5f2ea;
+  --sidebar-accent-foreground: #1a1a1a;
+  --sidebar-border: #e7e2d6;
+  --sidebar-ring: #d4a017;
+}
+
+.dark {
+  --background: #1a1a1a;
+  --foreground: #fdfbf7;
+  --card: #262626;
+  --card-foreground: #fdfbf7;
+  --popover: #262626;
+  --popover-foreground: #fdfbf7;
+  --primary: #d4a017;
+  --primary-foreground: #1a1a1a;
+  --secondary: #2a2a2a;
+  --secondary-foreground: #fdfbf7;
+  --muted: #2a2a2a;
+  --muted-foreground: #a3a3a3;
+  --accent: #d4a017;
+  --accent-foreground: #1a1a1a;
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: #d4a017;
+  --chart-1: #d4a017;
+  --chart-2: #b8860b;
+  --chart-3: #e6b838;
+  --chart-4: #a3a3a3;
+  --chart-5: #6b6b6b;
+  --sidebar: #1a1a1a;
+  --sidebar-foreground: #fdfbf7;
+  --sidebar-primary: #d4a017;
+  --sidebar-primary-foreground: #1a1a1a;
+  --sidebar-accent: #262626;
+  --sidebar-accent-foreground: #fdfbf7;
+  --sidebar-border: oklch(1 0 0 / 12%);
+  --sidebar-ring: #d4a017;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-open-sans), system-ui, sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-montserrat), system-ui, sans-serif;
+  }
+}
+
+/* ===== Sam Bau custom utilities & components ===== */
+
+/* Display heading utility */
+@layer utilities {
+  .font-display {
+    font-family: var(--font-montserrat), system-ui, sans-serif;
+  }
+  .font-body {
+    font-family: var(--font-open-sans), system-ui, sans-serif;
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Diagonal clip helper (45deg cut on top-right) */
+.clip-corner-tr {
+  clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 0 100%);
+}
+.clip-corner-bl {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 28px 100%, 0 calc(100% - 28px));
+}
+.clip-corner-both {
+  clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));
+}
+.clip-slanted-right {
+  clip-path: polygon(0 0, 100% 0, calc(100% - 40px) 100%, 0 100%);
+}
+.clip-slanted-left {
+  clip-path: polygon(40px 0, 100% 0, 100% 100%, 0 100%);
+}
+
+/* Subtle concrete / charcoal noise texture overlay */
+.bg-concrete-noise {
+  background-color: #1a1a1a;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(212, 160, 23, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(212, 160, 23, 0.04) 0%, transparent 50%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.12'/%3E%3C/svg%3E");
+}
+
+/* Gold gradient text */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #e6b838 0%, #d4a017 50%, #b8860b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Section gold divider line */
+.divider-gold {
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, #d4a017 20%, #d4a017 80%, transparent 100%);
+}
+
+/* Arrow bullet (skewed gold rectangle) */
+.arrow-bullet {
+  position: relative;
+  padding-left: 1.75rem;
+}
+.arrow-bullet::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%) skewX(-20deg);
+  width: 12px;
+  height: 12px;
+  background: #d4a017;
+  flex-shrink: 0;
+}
+.arrow-bullet::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%) skewX(-20deg);
+  width: 6px;
+  height: 12px;
+  background: linear-gradient(90deg, #d4a017, transparent);
+}
+
+/* Scalloped seal badge */
+.seal-badge {
+  background: linear-gradient(135deg, #e6b838 0%, #d4a017 50%, #b8860b 100%);
+  box-shadow:
+    0 0 0 3px #fdfbf7 inset,
+    0 0 0 4px #d4a017 inset;
+}
+
+/* Animated fade/slide on scroll trigger */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up {
+  animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Slow zoom for hero bg */
+@keyframes slowZoom {
+  from { transform: scale(1.08); }
+  to { transform: scale(1.18); }
+}
+.animate-slow-zoom {
+  animation: slowZoom 18s ease-in-out infinite alternate;
+}
+
+/* Marquee / horizontal scroll for services strip */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 32s linear infinite;
+}
+
+/* Custom scrollbar for content areas */
+.custom-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.custom-scroll::-webkit-scrollbar-track {
+  background: #f5f2ea;
+}
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: #d4a017;
+  border-radius: 4px;
+}
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: #b8860b;
+}
+
+/* Sticky footer behaviour handled by layout flex */
+html, body {
+  min-height: 100%;
+}

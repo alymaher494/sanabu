@@ -1,15 +1,24 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/site/page-hero";
+import { BreadcrumbJsonLd } from "@/components/site/json-ld";
 import { COMPANY } from "@/lib/site-data";
 
 export const metadata: Metadata = {
   title: "Datenschutz",
-  description: "Datenschutzerklärung von Sam Bau gemäß DSGVO.",
+  description: "Datenschutzerklärung von Sam Bau gemäß DSGVO – Kahl am Main.",
+  alternates: { canonical: "/datenschutz" },
+  robots: { index: true, follow: true },
 };
 
 export default function DatenschutzPage() {
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Start", url: "/" },
+          { name: "Datenschutz", url: "/datenschutz" },
+        ]}
+      />
       <PageHero
         eyebrow="Rechtliches"
         title="Datenschutz"

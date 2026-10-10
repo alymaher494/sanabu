@@ -2,17 +2,31 @@ import type { Metadata } from "next";
 import { Clock, MapPin, Phone } from "lucide-react";
 import { PageHero } from "@/components/site/page-hero";
 import { Contact } from "@/components/site/contact";
+import { BreadcrumbJsonLd } from "@/components/site/json-ld";
 import { COMPANY } from "@/lib/site-data";
 
 export const metadata: Metadata = {
-  title: "Kontakt",
+  title: "Kontakt – Sam Bau Kahl am Main",
   description:
     "Kontaktieren Sie Sam Bau in Kahl am Main – telefonisch, per E-Mail oder über unser Anfrageformular. Bei Wasserschäden reagieren wir innerhalb von 24 Stunden.",
+  alternates: { canonical: "/kontakt" },
+  openGraph: {
+    title: "Kontakt – Sam Bau Kahl am Main",
+    description: "Telefon, E-Mail oder Anfrageformular – wir melden uns innerhalb von 24 Stunden.",
+    url: "/kontakt",
+    images: [{ url: "/images/cta-bg.png", width: 1344, height: 768, alt: "Sam Bau Kontakt" }],
+  },
 };
 
 export default function KontaktPage() {
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Start", url: "/" },
+          { name: "Kontakt", url: "/kontakt" },
+        ]}
+      />
       <PageHero
         eyebrow="Kontakt"
         title={<>Wir sind <span className="text-gold">für Sie da.</span></>}

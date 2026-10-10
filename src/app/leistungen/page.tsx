@@ -2,21 +2,38 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { PageHero } from "@/components/site/page-hero";
-import { ServiceDetail } from "@/components/site/service-detail";
 import { Process } from "@/components/site/process";
 import { Faq } from "@/components/site/faq";
 import { CtaBanner } from "@/components/site/cta-banner";
+import { BreadcrumbJsonLd } from "@/components/site/json-ld";
 import { SERVICES } from "@/lib/site-data";
 
 export const metadata: Metadata = {
   title: "Leistungen",
   description:
-    "Unsere Kernleistungen: Sanierung & Renovierung, Abbrucharbeiten, Entrümpelung & Entsorgung, Bautrocknung & Wasserschadensanierung sowie Beratung & Besichtigung – alles aus einer Hand.",
+    "Unsere Kernleistungen: Sanierung & Renovierung, Abbrucharbeiten, Entrümpelung & Entsorgung, Bautrocknung & Wasserschadensanierung sowie Beratung & Besichtigung – alles aus einer Hand in Kahl am Main.",
+  keywords: [
+    "Bauunternehmen Kahl am Main",
+    "Sanierung",
+    "Abbruch",
+    "Entrümpelung",
+    "Bautrocknung",
+    "Rhein-Main",
+    "Sam Bau",
+  ],
+  alternates: { canonical: "/leistungen" },
 };
 
 export default function LeistungenPage() {
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Start", url: "/" },
+          { name: "Leistungen", url: "/leistungen" },
+        ]}
+      />
+
       <PageHero
         eyebrow="Unsere Leistungen"
         title={<>Sanierung, Abbruch &<br />Wiederherstellung.</>}
@@ -50,12 +67,70 @@ export default function LeistungenPage() {
         </div>
       </section>
 
-      {/* Service details */}
+      {/* Service cards grid (each links to a dedicated detail page) */}
       <section className="bg-cream py-16 lg:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-16 lg:space-y-24">
-          {SERVICES.map((service, i) => (
-            <ServiceDetail key={service.id} service={service} index={i} />
-          ))}
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl mb-12">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="h-px w-10 bg-gold" />
+              <span className="font-display font-semibold text-xs tracking-[0.3em] uppercase text-gold">
+                Leistungen im Überblick
+              </span>
+            </div>
+            <h2 className="font-display font-extrabold uppercase text-charcoal text-3xl sm:text-4xl lg:text-5xl leading-[1.05] tracking-tight">
+              Alle Leistungen <span className="text-gold">auf einen Blick.</span>
+            </h2>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {SERVICES.map((service, i) => (
+              <Link
+                key={service.id}
+                href={`/leistungen/${service.slug}`}
+                className="group relative flex flex-col bg-white border border-[#e7e2d6] hover:border-gold transition-all duration-300 hover:shadow-[0_24px_48px_-24px_rgba(26,26,26,0.25)] overflow-hidden"
+              >
+                {/* Image */}
+                <div className="relative h-52 overflow-hidden">
+                  <img
+                    src={service.image}
+                    alt={`${service.title} – Sam Bau`}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-charcoal/10 to-transparent" />
+                  <div className="absolute bottom-3 left-4 right-4 flex items-end justify-between">
+                    <span className="font-display font-extrabold text-cream text-2xl drop-shadow-md">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="text-[10px] font-display font-bold uppercase tracking-[0.2em] text-gold bg-charcoal/70 px-2 py-1">
+                      {service.short}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Body */}
+                <div className="p-6 flex flex-col flex-1">
+                  <h3 className="font-display font-bold uppercase tracking-wide text-charcoal text-lg leading-tight">
+                    {service.title}
+                  </h3>
+                  <p className="mt-2 text-sm text-charcoal/65 leading-relaxed flex-1">
+                    {service.description}
+                  </p>
+                  <ul className="mt-4 space-y-1.5">
+                    {service.bullets.slice(0, 3).map((b) => (
+                      <li key={b} className="arrow-bullet text-xs text-charcoal/70">
+                        {b}
+                      </li>
+                    ))}
+                  </ul>
+                  <span className="mt-5 inline-flex items-center gap-2 text-xs font-display font-bold uppercase tracking-[0.18em] text-gold group-hover:text-gold-dark transition-colors">
+                    Leistung ansehen
+                    <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 

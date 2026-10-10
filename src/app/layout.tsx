@@ -1,9 +1,11 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Montserrat, Open_Sans } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { SiteHeader } from "@/components/site/header";
 import { SiteFooter } from "@/components/site/footer";
+import { LocalBusinessJsonLd } from "@/components/site/json-ld";
+import { COMPANY, SITE_URL } from "@/lib/site-data";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -20,12 +22,14 @@ const openSans = Open_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Sam Bau – Sanierung & Renovierung | Ihr Haus – Unsere Sorge",
     template: "%s | Sam Bau",
   },
   description:
-    "Sam Bau ist Ihr kompetenter Partner für Sanierung & Renovierung, Abbrucharbeiten, Entrümpelung & Entsorgung, Bautrocknung & Wasserschadensanierung sowie Beratung & Besichtigung in Kahl am Main und dem Rhein-Main-Gebiet.",
+    "Sam Bau in Kahl am Main – Ihr kompetenter Partner für Sanierung & Renovierung, Abbrucharbeiten, Entrümpelung & Entsorgung, Bautrocknung & Wasserschadensanierung sowie Beratung & Besichtigung im Rhein-Main-Gebiet.",
+  applicationName: "Sam Bau",
   keywords: [
     "Sam Bau",
     "Sanierung",
@@ -38,23 +42,64 @@ export const metadata: Metadata = {
     "Kahl am Main",
     "Rhein-Main",
     "Bauunternehmen",
+    "Festpreis-Angebot",
   ],
-  authors: [{ name: "Sam Bau" }],
-  icons: {
-    icon: "/favicon.svg",
+  authors: [{ name: "Sam Bau", url: SITE_URL }],
+  creator: "Sam Bau",
+  publisher: "Sam Bau",
+  alternates: {
+    canonical: "/",
+    languages: { "de-DE": "/" },
   },
   openGraph: {
-    title: "Sam Bau – Sanierung & Renovierung",
-    description: "Ihr Haus – Unsere Sorge. Kompetente Bau- und Sanierungsdienstleistungen in Kahl am Main.",
-    siteName: "Sam Bau",
     type: "website",
     locale: "de_DE",
+    url: SITE_URL,
+    siteName: "Sam Bau",
+    title: "Sam Bau – Sanierung & Renovierung | Ihr Haus – Unsere Sorge",
+    description:
+      "Ihr Haus – Unsere Sorge. Kompetente Bau- und Sanierungsdienstleistungen in Kahl am Main und dem Rhein-Main-Gebiet – alles aus einer Hand.",
+    images: [
+      {
+        url: "/images/hero-bg.png",
+        width: 1344,
+        height: 768,
+        alt: "Sam Bau – Sanierung & Renovierung in Kahl am Main",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Sam Bau – Sanierung & Renovierung",
-    description: "Ihr Haus – Unsere Sorge.",
+    description: "Ihr Haus – Unsere Sorge. Bau- und Sanierungsdienstleistungen in Kahl am Main.",
+    images: ["/images/hero-bg.png"],
   },
+  icons: {
+    icon: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
+  manifest: "/manifest.webmanifest",
+  category: "construction",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fdfbf7" },
+    { media: "(prefers-color-scheme: dark)", color: "#1a1a1a" },
+  ],
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -64,6 +109,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de" suppressHydrationWarning>
+      <head>
+        <LocalBusinessJsonLd />
+      </head>
       <body
         className={`${montserrat.variable} ${openSans.variable} antialiased bg-background text-foreground`}
       >

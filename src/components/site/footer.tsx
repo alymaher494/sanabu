@@ -73,7 +73,7 @@ export function SiteFooter() {
               {SERVICES.map((s) => (
                 <li key={s.id}>
                   <Link
-                    href={`/leistungen#${s.slug}`}
+                    href={`/leistungen/${s.slug}`}
                     className="text-sm text-cream/65 hover:text-gold transition-colors inline-flex items-center gap-2 group"
                   >
                     <span className="h-px w-3 bg-gold/50 group-hover:w-5 transition-all" />

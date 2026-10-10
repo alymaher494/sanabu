@@ -1,15 +1,24 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/site/page-hero";
+import { BreadcrumbJsonLd } from "@/components/site/json-ld";
 import { COMPANY } from "@/lib/site-data";
 
 export const metadata: Metadata = {
   title: "Impressum",
-  description: "Impressum und Anbieterkennzeichnung gemäß § 5 TMG.",
+  description: "Impressum und Anbieterkennzeichnung gemäß § 5 TMG – Sam Bau, Kahl am Main.",
+  alternates: { canonical: "/impressum" },
+  robots: { index: true, follow: true },
 };
 
 export default function ImpressumPage() {
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Start", url: "/" },
+          { name: "Impressum", url: "/impressum" },
+        ]}
+      />
       <PageHero
         eyebrow="Rechtliches"
         title="Impressum"

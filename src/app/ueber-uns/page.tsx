@@ -13,12 +13,20 @@ import { StatsStrip } from "@/components/site/stats-strip";
 import { Process } from "@/components/site/process";
 import { Testimonials } from "@/components/site/testimonials";
 import { CtaBanner } from "@/components/site/cta-banner";
+import { BreadcrumbJsonLd } from "@/components/site/json-ld";
 import { COMPANY, VALUES } from "@/lib/site-data";
 
 export const metadata: Metadata = {
-  title: "Über uns",
+  title: "Über uns – Sam Bau aus Kahl am Main",
   description:
     "Sam Bau aus Kahl am Main – Ihr verlässlicher Partner für Sanierung, Abbruch und Wiederherstellung im Rhein-Main-Gebiet. Stark im Bestand, verlässlich in der Ausführung.",
+  alternates: { canonical: "/ueber-uns" },
+  openGraph: {
+    title: "Über uns – Sam Bau aus Kahl am Main",
+    description: "Stark im Bestand. Verlässlich in der Ausführung.",
+    url: "/ueber-uns",
+    images: [{ url: "/images/workshop.png", width: 1344, height: 768, alt: "Sam Bau Werkstatt" }],
+  },
 };
 
 const VALUE_ICONS: Record<string, LucideIcon> = {
@@ -31,6 +39,12 @@ const VALUE_ICONS: Record<string, LucideIcon> = {
 export default function UeberUnsPage() {
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Start", url: "/" },
+          { name: "Über uns", url: "/ueber-uns" },
+        ]}
+      />
       <PageHero
         eyebrow="Über Sam Bau"
         title={<>Stark im Bestand.<br />Verlässlich in der Ausführung.</>}

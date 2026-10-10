@@ -71,7 +71,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
         {/* Footer link */}
         <div className="mt-auto flex flex-col gap-3">
           <Link
-            href={`/leistungen#${service.slug}`}
+            href={`/leistungen/${service.slug}`}
             className="inline-flex items-center gap-2 text-xs font-display font-bold uppercase tracking-[0.18em] text-charcoal hover:text-gold transition-colors group/link"
           >
             Mehr erfahren

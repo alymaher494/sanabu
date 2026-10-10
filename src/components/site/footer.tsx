@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Phone, Mail, MapPin, ArrowUp } from "lucide-react";
 import { SamBauLogo } from "@/components/sam-bau-logo";
 import { COMPANY, NAV_LINKS, SERVICES } from "@/lib/site-data";
@@ -18,8 +19,7 @@ export function SiteFooter() {
             <SamBauLogo variant="dark" showTagline />
             <p className="mt-5 text-sm text-cream/65 leading-relaxed max-w-xs">
               Ihr verlässlicher Partner für Sanierung, Abbruch und
-              Wiederherstellung in {COMPANY.zipCity.split(" ").slice(1).join(" ")} und dem
-              Rhein-Main-Gebiet.
+              Wiederherstellung in {COMPANY.city} und dem Rhein-Main-Gebiet.
             </p>
             <p className="mt-4 font-display text-sm tracking-[0.2em] uppercase text-gold">
               {COMPANY.tagline}
@@ -34,15 +34,33 @@ export function SiteFooter() {
             <ul className="space-y-2.5">
               {NAV_LINKS.map((l) => (
                 <li key={l.href}>
-                  <a
+                  <Link
                     href={l.href}
                     className="text-sm text-cream/65 hover:text-gold transition-colors inline-flex items-center gap-2 group"
                   >
                     <span className="h-px w-3 bg-gold/50 group-hover:w-5 transition-all" />
                     {l.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
+              <li>
+                <Link
+                  href="/impressum"
+                  className="text-sm text-cream/65 hover:text-gold transition-colors inline-flex items-center gap-2 group"
+                >
+                  <span className="h-px w-3 bg-gold/50 group-hover:w-5 transition-all" />
+                  Impressum
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/datenschutz"
+                  className="text-sm text-cream/65 hover:text-gold transition-colors inline-flex items-center gap-2 group"
+                >
+                  <span className="h-px w-3 bg-gold/50 group-hover:w-5 transition-all" />
+                  Datenschutz
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -54,13 +72,13 @@ export function SiteFooter() {
             <ul className="space-y-2.5">
               {SERVICES.map((s) => (
                 <li key={s.id}>
-                  <a
-                    href="#leistungen"
+                  <Link
+                    href={`/leistungen#${s.slug}`}
                     className="text-sm text-cream/65 hover:text-gold transition-colors inline-flex items-center gap-2 group"
                   >
                     <span className="h-px w-3 bg-gold/50 group-hover:w-5 transition-all" />
                     {s.title}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -108,21 +126,21 @@ export function SiteFooter() {
             © {year} {COMPANY.name} · {COMPANY.street}, {COMPANY.zipCity}
           </p>
           <div className="flex items-center gap-5 text-xs text-cream/50">
-            <a href="#" className="hover:text-gold transition-colors">
+            <Link href="/impressum" className="hover:text-gold transition-colors">
               Impressum
-            </a>
+            </Link>
             <span className="h-3 w-px bg-cream/20" />
-            <a href="#" className="hover:text-gold transition-colors">
+            <Link href="/datenschutz" className="hover:text-gold transition-colors">
               Datenschutz
-            </a>
-            <a
-              href="#start"
+            </Link>
+            <Link
+              href="/"
               className="ml-2 inline-flex items-center gap-1.5 text-gold hover:text-cream transition-colors"
               aria-label="Nach oben"
             >
               <ArrowUp className="h-3.5 w-3.5" />
               Nach oben
-            </a>
+            </Link>
           </div>
         </div>
       </div>

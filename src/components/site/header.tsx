@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
@@ -9,8 +11,14 @@ import { NAV_LINKS, COMPANY } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
 export function SiteHeader() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+
+  // Home page has a full-screen dark hero -> transparent header at top.
+  // All other (inner) pages start with a dark PageHero too, so transparent header
+  // is fine everywhere at the top. Once scrolled, header gets the cream background.
+  const isHome = pathname === "/";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -18,6 +26,9 @@ export function SiteHeader() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
     <header
@@ -62,25 +73,29 @@ export function SiteHeader() {
       {/* Main nav */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          <a href="#start" aria-label="Sam Bau Startseite">
+          <Link href="/" aria-label="Sam Bau Startseite">
             <SamBauLogo variant={scrolled ? "dark" : "light"} />
-          </a>
+          </Link>
 
           {/* Desktop nav */}
           <nav className="hidden lg:flex items-center gap-1">
             {NAV_LINKS.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 className={cn(
                   "relative px-4 py-2 text-sm font-display font-semibold tracking-wide uppercase transition-colors",
                   scrolled
                     ? "text-charcoal hover:text-gold"
-                    : "text-cream hover:text-gold"
+                    : "text-cream hover:text-gold",
+                  isActive(link.href) && "text-gold"
                 )}
               >
                 {link.label}
-              </a>
+                {isActive(link.href) && (
+                  <span className="absolute -bottom-0.5 left-4 right-4 h-0.5 bg-gold" />
+                )}
+              </Link>
             ))}
           </nav>
 
@@ -90,7 +105,7 @@ export function SiteHeader() {
               size="lg"
               className="clip-slanted-right bg-gold text-charcoal hover:bg-gold-dark font-display font-bold uppercase tracking-wider px-7 shadow-none"
             >
-              <a href="#kontakt">Angebot anfordern</a>
+              <Link href="/kontakt">Angebot anfordern</Link>
             </Button>
           </div>
 
@@ -130,12 +145,17 @@ export function SiteHeader() {
                 <nav className="flex flex-col p-6 gap-1">
                   {NAV_LINKS.map((link) => (
                     <SheetClose asChild key={link.href}>
-                      <a
+                      <Link
                         href={link.href}
-                        className="font-display font-semibold tracking-[0.1em] uppercase text-cream/90 hover:text-gold py-3 border-b border-white/5 transition-colors"
+                        className={cn(
+                          "font-display font-semibold tracking-[0.1em] uppercase py-3 border-b border-white/5 transition-colors",
+                          isActive(link.href)
+                            ? "text-gold"
+                            : "text-cream/90 hover:text-gold"
+                        )}
                       >
                         {link.label}
-                      </a>
+                      </Link>
                     </SheetClose>
                   ))}
                 </nav>
@@ -144,7 +164,7 @@ export function SiteHeader() {
                     asChild
                     className="w-full clip-slanted-right bg-gold text-charcoal hover:bg-gold-dark font-display font-bold uppercase tracking-wider h-12"
                   >
-                    <a href="#kontakt">Angebot anfordern</a>
+                    <Link href="/kontakt">Angebot anfordern</Link>
                   </Button>
                   <div className="flex flex-col gap-2 text-sm text-cream/80">
                     <a

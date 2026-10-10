@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { ArrowRight, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { COMPANY } from "@/lib/site-data";
@@ -45,10 +46,10 @@ export function CtaBanner() {
               size="lg"
               className="clip-slanted-right bg-gold text-charcoal hover:bg-gold-light font-display font-bold uppercase tracking-wider h-14 px-8 text-sm shadow-[0_8px_30px_-8px_rgba(212,160,23,0.6)]"
             >
-              <a href="#kontakt" className="flex items-center gap-2">
+              <Link href="/kontakt" className="flex items-center gap-2">
                 Projekt anfragen
                 <ArrowRight className="h-4 w-4" />
-              </a>
+              </Link>
             </Button>
             <Button
               asChild

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { ArrowRight, Phone, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { COMPANY } from "@/lib/site-data";
@@ -73,10 +74,10 @@ export function Hero() {
               size="lg"
               className="clip-slanted-right bg-gold text-charcoal hover:bg-gold-light font-display font-bold uppercase tracking-wider h-14 px-8 text-sm shadow-[0_8px_30px_-8px_rgba(212,160,23,0.6)]"
             >
-              <a href="#kontakt" className="flex items-center gap-2">
+              <Link href="/kontakt" className="flex items-center gap-2">
                 Angebot anfordern
                 <ArrowRight className="h-4 w-4" />
-              </a>
+              </Link>
             </Button>
             <Button
               asChild
@@ -84,9 +85,9 @@ export function Hero() {
               size="lg"
               className="border-gold/60 text-cream hover:bg-gold hover:text-charcoal hover:border-gold font-display font-bold uppercase tracking-wider h-14 px-8 text-sm bg-transparent"
             >
-              <a href="#leistungen" className="flex items-center gap-2">
+              <Link href="/leistungen" className="flex items-center gap-2">
                 Leistungen ansehen
-              </a>
+              </Link>
             </Button>
           </div>
 

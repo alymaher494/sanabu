@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import {
   Hammer,
   Pickaxe,
@@ -68,13 +69,22 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
         </ul>
 
         {/* Footer link */}
-        <a
-          href="#kontakt"
-          className="mt-auto inline-flex items-center gap-2 text-xs font-display font-bold uppercase tracking-[0.18em] text-charcoal hover:text-gold transition-colors group/link"
-        >
-          Leistung anfragen
-          <ArrowRight className="h-3.5 w-3.5 group-hover/link:translate-x-1 transition-transform" />
-        </a>
+        <div className="mt-auto flex flex-col gap-3">
+          <Link
+            href={`/leistungen#${service.slug}`}
+            className="inline-flex items-center gap-2 text-xs font-display font-bold uppercase tracking-[0.18em] text-charcoal hover:text-gold transition-colors group/link"
+          >
+            Mehr erfahren
+            <ArrowRight className="h-3.5 w-3.5 group-hover/link:translate-x-1 transition-transform" />
+          </Link>
+          <Link
+            href="/kontakt"
+            className="inline-flex items-center gap-2 text-xs font-display font-bold uppercase tracking-[0.18em] text-gold hover:text-gold-dark transition-colors"
+          >
+            Leistung anfragen
+            <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
+        </div>
       </div>
     </article>
   );
@@ -131,13 +141,13 @@ export function Services() {
                 nicht steht.
               </p>
             </div>
-            <a
-              href="#kontakt"
+            <Link
+              href="/kontakt"
               className="relative mt-6 inline-flex items-center justify-center gap-2 h-11 px-5 bg-gold text-charcoal font-display font-bold uppercase tracking-wider text-xs clip-slanted-right hover:bg-gold-light transition-colors"
             >
               Persönlich anfragen
               <ArrowRight className="h-3.5 w-3.5" />
-            </a>
+            </Link>
           </div>
         </div>
       </div>

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Montserrat, Open_Sans } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
+import { SiteHeader } from "@/components/site/header";
+import { SiteFooter } from "@/components/site/footer";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -18,7 +20,10 @@ const openSans = Open_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Sam Bau – Sanierung & Renovierung | Ihr Haus – Unsere Sorge",
+  title: {
+    default: "Sam Bau – Sanierung & Renovierung | Ihr Haus – Unsere Sorge",
+    template: "%s | Sam Bau",
+  },
   description:
     "Sam Bau ist Ihr kompetenter Partner für Sanierung & Renovierung, Abbrucharbeiten, Entrümpelung & Entsorgung, Bautrocknung & Wasserschadensanierung sowie Beratung & Besichtigung in Kahl am Main und dem Rhein-Main-Gebiet.",
   keywords: [
@@ -62,7 +67,11 @@ export default function RootLayout({
       <body
         className={`${montserrat.variable} ${openSans.variable} antialiased bg-background text-foreground`}
       >
-        {children}
+        <div className="flex min-h-screen flex-col bg-cream">
+          <SiteHeader />
+          <main className="flex-1">{children}</main>
+          <SiteFooter />
+        </div>
         <Toaster />
       </body>
     </html>

@@ -32,6 +32,9 @@ const securityHeaders = [
  */
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  turbopack: {
+    root: __dirname,
+  },
   images: {
     // PNG brand assets in /public/images; keep default optimization.
     formats: ["image/avif", "image/webp"],

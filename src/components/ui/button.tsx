@@ -50,13 +50,27 @@ function Button({
 }: ButtonProps) {
   const Comp = asChild ? Slot : motion.button
 
+  // Explicitly remove Framer Motion gesture props that shouldn't be passed to DOM elements
+  // when using asChild (they get passed to the child component)
+  const { whileTap, whileHover, ...restProps } = props as Record<string, unknown>
+
+  if (asChild) {
+    return (
+      <Comp
+        data-slot="button"
+        className={cn(buttonVariants({ variant, size, className }))}
+        {...restProps}
+      />
+    )
+  }
+
   return (
     <Comp
       data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}
       whileTap={{ scale: 0.97 }}
       whileHover={{ scale: 1.01 }}
-      {...props}
+      {...restProps}
     />
   )
 }

@@ -5,6 +5,7 @@ import { Services } from "@/components/site/services";
 import { StatsStrip } from "@/components/site/stats-strip";
 import { WhyUs } from "@/components/site/why-us";
 import { Process } from "@/components/site/process";
+import { ImageBand } from "@/components/site/image-band";
 import { Testimonials } from "@/components/site/testimonials";
 import { CtaBanner } from "@/components/site/cta-banner";
 
@@ -24,6 +25,7 @@ export default function Home() {
       <StatsStrip />
       <WhyUs />
       <Process />
+      <ImageBand />
       <Testimonials />
       <CtaBanner />
     </>

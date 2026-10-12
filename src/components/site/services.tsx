@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import {
   Hammer,
   Pickaxe,
@@ -31,6 +32,21 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
       className="group relative flex flex-col bg-white border border-[#e7e2d6] hover:border-gold transition-all duration-300 hover:shadow-[0_24px_48px_-24px_rgba(26,26,26,0.25)] overflow-hidden"
       whileHover={{ y: -4, boxShadow: "0 24px 48px -24px rgba(26,26,26,0.25)" }}
     >
+      {/* Service image */}
+      <div className="relative h-44 overflow-hidden">
+        <Image
+          src={service.image}
+          alt={`${service.title} – Sam Bau`}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="object-cover group-hover:scale-105 transition-transform duration-500"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-charcoal/50 via-transparent to-transparent" />
+        <span className="absolute bottom-3 left-4 font-display font-extrabold text-cream text-2xl drop-shadow-md">
+          {String(index + 1).padStart(2, "0")}
+        </span>
+      </div>
       {/* Gold accent top bar */}
       <div className="h-1 bg-gold w-0 group-hover:w-full transition-all duration-500" />
 
@@ -40,9 +56,6 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
           <div className="flex h-14 w-14 items-center justify-center border-2 border-gold/30 group-hover:border-gold transition-colors">
             <Icon className="h-7 w-7 text-gold" strokeWidth={1.75} />
           </div>
-          <span className="absolute -top-2 -right-2 font-display font-extrabold text-[11px] tracking-widest text-gold/40 group-hover:text-gold transition-colors">
-            {String(index + 1).padStart(2, "0")}
-          </span>
         </div>
 
         {/* Title */}

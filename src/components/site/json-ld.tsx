@@ -16,7 +16,7 @@ export function LocalBusinessJsonLd() {
     url: SITE_URL,
     telephone: COMPANY.phone,
     email: COMPANY.email,
-    image: `${SITE_URL}/images/hero-bg.png`,
+    image: `${SITE_URL}/images/hero-bg.jpg`,
     logo: `${SITE_URL}/favicon.svg`,
     priceRange: "€€",
     address: {

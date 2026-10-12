@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     title: "Über uns – Sam Bau aus Kahl am Main",
     description: "Stark im Bestand. Verlässlich in der Ausführung.",
     url: "/ueber-uns",
-    images: [{ url: "/images/workshop.png", width: 1344, height: 768, alt: "Sam Bau Werkstatt" }],
+    images: [{ url: "/images/workshop.jpg", width: 1344, height: 768, alt: "Sam Bau Baustelle mit Bagger und LKW" }],
   },
 };
 
@@ -51,7 +51,7 @@ export default function UeberUnsPage() {
         title={<>Stark im Bestand.<br />Verlässlich in der Ausführung.</>}
         subtitle="Sam Bau ist in Kahl am Main und im gesamten Rhein-Main-Gebiet für Sie da. Wir übernehmen anspruchsvolle Arbeiten rund um Abbruch, Sanierung, Trocknung und Wiederherstellung – mit nur einem Ansprechpartner und voller Verantwortung."
         crumbs={[{ label: "Über uns" }]}
-        image="/images/workshop.png"
+        image="/images/workshop.jpg"
       />
 
       {/* Story section */}
@@ -62,8 +62,8 @@ export default function UeberUnsPage() {
             <div className="relative order-2 lg:order-1">
               <div className="relative overflow-hidden clip-corner-tr border border-[#e7e2d6] shadow-[0_24px_48px_-24px_rgba(26,26,26,0.35)] h-[380px] lg:h-[500px]">
                 <Image
-                  src="/images/about.png"
-                  alt="Sam Bau Handwerker bei der Arbeit"
+                  src="/images/about.jpg"
+                  alt="Sam Bau Team mit Bagger auf der Baustelle"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover"
@@ -156,7 +156,7 @@ export default function UeberUnsPage() {
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage:
-              "linear-gradient(90deg, rgba(26,26,26,0.92) 0%, rgba(26,26,26,0.7) 60%, rgba(26,26,26,0.55) 100%), url('/images/workshop.png')",
+              "linear-gradient(90deg, rgba(26,26,26,0.92) 0%, rgba(26,26,26,0.7) 60%, rgba(26,26,26,0.55) 100%), url('/images/workshop.jpg')",
           }}
           aria-hidden
         />

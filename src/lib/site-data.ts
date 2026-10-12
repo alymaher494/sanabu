@@ -75,7 +75,7 @@ export const SERVICES: Service[] = [
       "Badezimmer- und Küchensanierung",
     ],
     icon: "Hammer",
-    image: "/images/srv-sanierung.png",
+    image: "/images/srv-sanierung.jpg",
     metaTitle: "Sanierung & Renovierung in Kahl am Main",
     metaDescription:
       "Sanierung & Renovierung in Kahl am Main: Altbausanierung, Modernisierung, Innenausbau, Trockenbau, Maler- und Bodenarbeiten. Festpreis-Angebot, ein Ansprechpartner. Jetzt anfragen!",
@@ -154,7 +154,7 @@ export const SERVICES: Service[] = [
       "Schadstofferkennung & Übergabe",
     ],
     icon: "Pickaxe",
-    image: "/images/srv-abbruch.png",
+    image: "/images/srv-abbruch.jpg",
     metaTitle: "Abbrucharbeiten & Entkernung in Kahl am Main",
     metaDescription:
       "Kontrollierter Abbruch, Rückbau und Entkernung in Kahl am Main: staubarm, sicher, Materialtrennung & fachgerechte Entsorgung. Auch für Hausverwaltungen & GU. Festpreis!",
@@ -231,7 +231,7 @@ export const SERVICES: Service[] = [
       "Leerstandsreinigung",
     ],
     icon: "Trash2",
-    image: "/images/srv-entruempelung.png",
+    image: "/images/srv-entruempelung.jpg",
     metaTitle: "Entrümpelung & Entsorgung in Kahl am Main",
     metaDescription:
       "Entrümpelung, Haushaltsauflösung & Entsorgung in Kahl am Main: Wohnung, Keller, Garage, Hof. Inkl. fachgerechter Entsorgung mit Nachweis. Schlüssel übergeben – wir übernehmen den Rest.",
@@ -308,7 +308,7 @@ export const SERVICES: Service[] = [
       "Notfelleinsatz rund um die Uhr",
     ],
     icon: "Droplets",
-    image: "/images/srv-bautrocknung.png",
+    image: "/images/srv-bautrocknung.jpg",
     metaTitle: "Bautrocknung & Wasserschadensanierung Kahl am Main",
     metaDescription:
       "Bautrocknung, Wasserschadensanierung & Schimmelsanierung in Kahl am Main: schnelle Reaktion nach Rohrbruch, Hochwasser oder Löschwasser. Inkl. Versicherungsdoku & 24h-Notfall.",
@@ -385,7 +385,7 @@ export const SERVICES: Service[] = [
       "Unverbindliche Erstberatung",
     ],
     icon: "ClipboardCheck",
-    image: "/images/srv-beratung.png",
+    image: "/images/srv-beratung.jpg",
     metaTitle: "Beratung & Besichtigung in Kahl am Main – kostenlos",
     metaDescription:
       "Kostenlose & unverbindliche Bauberatung und Vor-Ort-Besichtigung in Kahl am Main. Ehrliche Schadensanalyse, klarer Kosten- & Ablaufplan. Jetzt Termin vereinbaren!",

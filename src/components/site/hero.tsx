@@ -20,7 +20,7 @@ export function Hero() {
         className="absolute inset-0 bg-cover bg-center"
         style={{
           backgroundImage:
-            "linear-gradient(105deg, rgba(26,26,26,0.95) 0%, rgba(26,26,26,0.78) 45%, rgba(26,26,26,0.45) 100%), url('/images/hero-bg.png')",
+            "linear-gradient(105deg, rgba(26,26,26,0.95) 0%, rgba(26,26,26,0.78) 45%, rgba(26,26,26,0.45) 100%), url('/images/hero-bg.jpg')",
         }}
         aria-hidden
       />

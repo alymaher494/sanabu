@@ -40,8 +40,8 @@ export function About() {
                 className="relative overflow-hidden clip-corner-tr border border-[#e7e2d6] shadow-[0_24px_48px_-24px_rgba(26,26,26,0.35)] h-[420px] lg:h-[540px]"
               >
                 <Image
-                  src="/images/about.png"
-                  alt="Sam Bau Handwerker bei der Arbeit – professionelle Sanierung und Renovierung"
+                  src="/images/about.jpg"
+                  alt="Sam Bau Team mit Baumaschinen im Einsatz – Sanierung und Renovierung"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover"

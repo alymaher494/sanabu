@@ -14,7 +14,7 @@ export function CtaBanner() {
         className="absolute inset-0 bg-cover bg-center"
         style={{
           backgroundImage:
-            "linear-gradient(90deg, rgba(26,26,26,0.95) 0%, rgba(26,26,26,0.75) 50%, rgba(26,26,26,0.6) 100%), url('/images/cta-bg.png')",
+            "linear-gradient(90deg, rgba(26,26,26,0.95) 0%, rgba(26,26,26,0.75) 50%, rgba(26,26,26,0.6) 100%), url('/images/cta-bg.jpg')",
         }}
         aria-hidden
       />

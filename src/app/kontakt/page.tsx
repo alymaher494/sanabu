@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     title: "Kontakt – Sam Bau Kahl am Main",
     description: "Telefon, E-Mail oder Anfrageformular – wir melden uns innerhalb von 24 Stunden.",
     url: "/kontakt",
-    images: [{ url: "/images/cta-bg.png", width: 1344, height: 768, alt: "Sam Bau Kontakt" }],
+    images: [{ url: "/images/cta-bg.jpg", width: 1344, height: 768, alt: "Sam Bau Kontakt" }],
   },
 };
 
@@ -32,7 +32,7 @@ export default function KontaktPage() {
         title={<>Wir sind <span className="text-gold">für Sie da.</span></>}
         subtitle="Ob Sanierung, Abbruch oder Wasserschaden – wir reagieren schnell und unkompliziert. Schreiben Sie uns oder rufen Sie an, wir beraten Sie ehrlich und unverbindlich."
         crumbs={[{ label: "Kontakt" }]}
-        image="/images/cta-bg.png"
+        image="/images/cta-bg.jpg"
       />
 
       {/* Quick info strip */}

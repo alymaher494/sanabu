@@ -18,7 +18,7 @@ export function ImageBand() {
         className="absolute inset-0 bg-cover bg-center"
         style={{
           backgroundImage:
-            "linear-gradient(90deg, rgba(26,26,26,0.88) 0%, rgba(26,26,26,0.55) 60%, rgba(26,26,26,0.35) 100%), url('/images/workshop.png')",
+            "linear-gradient(90deg, rgba(26,26,26,0.88) 0%, rgba(26,26,26,0.55) 60%, rgba(26,26,26,0.35) 100%), url('/images/workshop.jpg')",
         }}
         aria-hidden
       />

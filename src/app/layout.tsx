@@ -62,7 +62,7 @@ export const metadata: Metadata = {
       "Ihr Haus – Unsere Sorge. Kompetente Bau- und Sanierungsdienstleistungen in Kahl am Main und dem Rhein-Main-Gebiet – alles aus einer Hand.",
     images: [
       {
-        url: "/images/hero-bg.png",
+        url: "/images/hero-bg.jpg",
         width: 1344,
         height: 768,
         alt: "Sam Bau – Sanierung & Renovierung in Kahl am Main",
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Sam Bau – Sanierung & Renovierung",
     description: "Ihr Haus – Unsere Sorge. Bau- und Sanierungsdienstleistungen in Kahl am Main.",
-    images: ["/images/hero-bg.png"],
+    images: ["/images/hero-bg.jpg"],
   },
   icons: {
     icon: "/images/logo.png",

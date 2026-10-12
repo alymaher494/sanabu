@@ -40,7 +40,7 @@ export default function LeistungenPage() {
         title={<>Sanierung, Abbruch &<br />Wiederherstellung.</>}
         subtitle="Wir decken die gesamten Arbeiten rund um Bestand und Umbau ab – vom ersten Hammerschlag bis zur schlüsselfertigen Übergabe. Jedes Gewerk führen wir selbst oder mit festen Partner-Teams aus, die wir koordinieren."
         crumbs={[{ label: "Leistungen" }]}
-        image="/images/srv-sanierung.png"
+        image="/images/srv-sanierung.jpg"
       />
 
       {/* Intro band */}

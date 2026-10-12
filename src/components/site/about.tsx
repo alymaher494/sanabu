@@ -18,7 +18,7 @@ export function About() {
           viewport={{ once: true, margin: "-100px" }}
           variants={{
             hidden: { opacity: 0 },
-            show: { transition: { staggerChildren: 0.12 } },
+            show: { opacity: 1, transition: { staggerChildren: 0.12 } },
           }}
           className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center"
         >
@@ -136,7 +136,7 @@ export function About() {
               viewport={{ once: true }}
               variants={{
                 hidden: { opacity: 0 },
-                show: { transition: { staggerChildren: 0.1, delayChildren: 0.5 } },
+                show: { opacity: 1, y: 0, transition: { staggerChildren: 0.1, delayChildren: 0.5 } },
               }}
               className="mt-8 grid sm:grid-cols-3 gap-5"
             >

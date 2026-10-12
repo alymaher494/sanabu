@@ -7,38 +7,25 @@ import { WhyUs } from "@/components/site/why-us";
 import { Process } from "@/components/site/process";
 import { Testimonials } from "@/components/site/testimonials";
 import { CtaBanner } from "@/components/site/cta-banner";
-import { ScrollAnimation, StaggerContainer, StaggerItem } from "@/components/ui/scroll-animation";
 
+// NOTE: Do NOT wrap these sections in extra scroll-animation containers.
+// Every section already owns its entrance animation (framer-motion,
+// whileInView with opacity restored in the "show" variant). An additional
+// wrapper with initial opacity 0 hides the whole section if its own
+// "show" state never restores opacity — this previously made the entire
+// homepage invisible. Keep this composition flat.
 export default function Home() {
   return (
     <>
       <Hero />
       <MarqueeStrip />
-      <ScrollAnimation direction="up" delay={0.1}>
-        <About />
-      </ScrollAnimation>
-      <ScrollAnimation direction="up" delay={0.2}>
-        <Services />
-      </ScrollAnimation>
-      <ScrollAnimation direction="up" delay={0.3}>
-        <StatsStrip />
-      </ScrollAnimation>
-      <ScrollAnimation direction="up" delay={0.4}>
-        <WhyUs />
-      </ScrollAnimation>
-      <ScrollAnimation direction="up" delay={0.5}>
-        <Process />
-      </ScrollAnimation>
-      <StaggerContainer staggerDelay={0.1}>
-        <StaggerItem>
-          <ScrollAnimation direction="up" delay={0.6}>
-            <Testimonials />
-          </ScrollAnimation>
-        </StaggerItem>
-      </StaggerContainer>
-      <ScrollAnimation direction="up" delay={0.7}>
-        <CtaBanner />
-      </ScrollAnimation>
+      <About />
+      <Services />
+      <StatsStrip />
+      <WhyUs />
+      <Process />
+      <Testimonials />
+      <CtaBanner />
     </>
   );
 }

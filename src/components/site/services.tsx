@@ -123,20 +123,22 @@ export function Services() {
           </p>
         </div>
 
-        {/* Services grid */}
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Services grid — the motion wrapper IS the grid, so the cards
+            and the CTA card stay real grid items (a plain wrapper div would
+            collapse all cards into a single grid cell). */}
+        <div className="mt-12">
           <motion.div
             initial="hidden"
             animate="show"
             variants={{
               hidden: { opacity: 0 },
-              show: { transition: { staggerChildren: 0.08 } },
+              show: { opacity: 1, transition: { staggerChildren: 0.08 } },
             }}
+            className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
           >
             {SERVICES.map((s, i) => (
               <ServiceCard key={s.id} service={s} index={i} />
             ))}
-          </motion.div>
 
           {/* CTA card filling the 6th slot */}
           <div className="relative flex flex-col justify-between p-6 lg:p-7 bg-charcoal text-cream overflow-hidden clip-corner-tr">
@@ -162,6 +164,7 @@ export function Services() {
               <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
+          </motion.div>
         </div>
       </div>
     </section>

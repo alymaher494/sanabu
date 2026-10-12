@@ -34,7 +34,7 @@ export function Testimonials() {
           viewport={{ once: true, margin: "-100px" }}
           variants={{
             hidden: { opacity: 0 },
-            show: { transition: { staggerChildren: 0.12 } },
+            show: { opacity: 1, y: 0, transition: { staggerChildren: 0.12 } },
           }}
           className="mt-12 grid md:grid-cols-3 gap-6"
         >

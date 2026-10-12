@@ -50,7 +50,7 @@ export function Process() {
           viewport={{ once: true, margin: "-100px" }}
           variants={{
             hidden: { opacity: 0 },
-            show: { transition: { staggerChildren: 0.12 } },
+            show: { opacity: 1, y: 0, transition: { staggerChildren: 0.12 } },
           }}
           className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-4 relative"
         >

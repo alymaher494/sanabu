@@ -35,7 +35,7 @@ export function CtaBanner() {
           viewport={{ once: true }}
           variants={{
             hidden: { opacity: 0 },
-            show: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
+            show: { opacity: 1, y: 0, transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
           }}
           className="max-w-2xl"
         >

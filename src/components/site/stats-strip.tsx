@@ -20,7 +20,7 @@ export function StatsStrip() {
         viewport={{ once: true, margin: "-100px" }}
         variants={{
           hidden: { opacity: 0 },
-          show: { transition: { staggerChildren: 0.1 } },
+          show: { opacity: 1, y: 0, transition: { staggerChildren: 0.1 } },
         }}
         className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-14"
       >

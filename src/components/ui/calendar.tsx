@@ -185,6 +185,38 @@ function CalendarDayButton({
     if (modifiers.focused) ref.current?.focus()
   }, [modifiers.focused])
 
+  // Only forward safe props that don't conflict with Framer Motion's HTMLMotionProps
+  // Framer Motion redefines many DOM event handlers with different signatures (e.g., onDrag, onAnimationStart)
+  // react-day-picker mainly passes data-* attributes, disabled, and basic button props
+  // We explicitly construct a safe props object to avoid type conflicts
+  const safeProps: Record<string, unknown> = {}
+  
+  // Pass through standard button attributes that are safe (no Motion conflicts)
+  if (props.disabled !== undefined) safeProps.disabled = props.disabled
+  if (props.type !== undefined) safeProps.type = props.type
+  if (props.form !== undefined) safeProps.form = props.form
+  if (props.formAction !== undefined) safeProps.formAction = props.formAction
+  if (props.formEncType !== undefined) safeProps.formEncType = props.formEncType
+  if (props.formMethod !== undefined) safeProps.formMethod = props.formMethod
+  if (props.formNoValidate !== undefined) safeProps.formNoValidate = props.formNoValidate
+  if (props.formTarget !== undefined) safeProps.formTarget = props.formTarget
+  if (props.name !== undefined) safeProps.name = props.name
+  if (props.value !== undefined) safeProps.value = props.value
+  if (props.id !== undefined) safeProps.id = props.id
+  if (props.tabIndex !== undefined) safeProps.tabIndex = props.tabIndex
+  if (props.title !== undefined) safeProps.title = props.title
+  if (props.lang !== undefined) safeProps.lang = props.lang
+  if (props.dir !== undefined) safeProps.dir = props.dir
+  if (props.hidden !== undefined) safeProps.hidden = props.hidden
+  
+  // Pass through data-* and aria-* attributes (react-day-picker uses these heavily)
+  const propsRecord = props as Record<string, unknown>
+  Object.keys(propsRecord).forEach((key) => {
+    if (key.startsWith("data-") || key.startsWith("aria-")) {
+      safeProps[key] = propsRecord[key]
+    }
+  })
+
   return (
     <Button
       ref={ref}
@@ -205,7 +237,7 @@ function CalendarDayButton({
         defaultClassNames.day,
         className
       )}
-      {...props}
+      {...safeProps}
     />
   )
 }

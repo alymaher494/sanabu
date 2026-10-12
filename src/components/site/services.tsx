@@ -90,7 +90,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
           </Link>
         </div>
       </div>
-    </article>
+    </motion.article>
   );
 }
 

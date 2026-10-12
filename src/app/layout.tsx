@@ -75,8 +75,8 @@ export const metadata: Metadata = {
     images: ["/images/hero-bg.png"],
   },
   icons: {
-    icon: "/favicon.svg",
-    apple: "/favicon.svg",
+    icon: "/images/logo.png",
+    apple: "/images/logo.png",
   },
   manifest: "/manifest.webmanifest",
   category: "construction",

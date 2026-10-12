@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { COMPANY } from "@/lib/site-data";
+import { motion } from "framer-motion";
 
 export function CtaBanner() {
   return (
@@ -21,26 +22,65 @@ export function CtaBanner() {
       <div className="absolute top-0 left-0 right-0 h-1 bg-gold" aria-hidden />
       <div className="absolute bottom-0 left-0 right-0 h-1 bg-gold/40" aria-hidden />
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
-        <div className="max-w-2xl">
-          <div className="flex items-center gap-3 mb-4">
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-28"
+      >
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          variants={{
+            hidden: { opacity: 0 },
+            show: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
+          }}
+          className="max-w-2xl"
+        >
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+            }}
+            className="flex items-center gap-3 mb-4"
+          >
             <span className="h-px w-10 bg-gold" />
             <span className="font-display font-semibold text-xs tracking-[0.3em] uppercase text-gold">
               Ihr Projekt
             </span>
-          </div>
-          <h2 className="font-display font-extrabold uppercase text-cream text-3xl sm:text-4xl lg:text-5xl leading-[1.05] tracking-tight">
+          </motion.div>
+          <motion.h2
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+            }}
+            className="font-display font-extrabold uppercase text-cream text-3xl sm:text-4xl lg:text-5xl leading-[1.05] tracking-tight"
+          >
             Ihr Projekt.
             <br />
             <span className="text-gold">Unser nächster Einsatz.</span>
-          </h2>
-          <p className="mt-5 text-base lg:text-lg text-cream/75 leading-relaxed">
+          </motion.h2>
+          <motion.p
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+            }}
+            className="mt-5 text-base lg:text-lg text-cream/75 leading-relaxed"
+          >
             Schildern Sie uns kurz Ihr Vorhaben – wir melden uns
             zeitnah, vereinbaren eine kostenlose Besichtigung und erstellen
             Ihnen ein klares, transparentes Festpreis-Angebot.
-          </p>
+          </motion.p>
 
-          <div className="mt-9 flex flex-col sm:flex-row gap-4">
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+            }}
+            className="mt-9 flex flex-col sm:flex-row gap-4"
+          >
             <Button
               asChild
               size="lg"
@@ -62,9 +102,9 @@ export function CtaBanner() {
                 {COMPANY.phone}
               </a>
             </Button>
-          </div>
-        </div>
-      </div>
+          </motion.div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

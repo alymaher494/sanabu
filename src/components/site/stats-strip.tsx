@@ -1,6 +1,7 @@
 "use client";
 
 import { STATS } from "@/lib/site-data";
+import { motion } from "framer-motion";
 
 export function StatsStrip() {
   return (
@@ -13,23 +14,42 @@ export function StatsStrip() {
         }}
         aria-hidden
       />
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-14">
+      <motion.div
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={{
+          hidden: { opacity: 0 },
+          show: { transition: { staggerChildren: 0.1 } },
+        }}
+        className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-14"
+      >
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4">
           {STATS.map((s) => (
-            <div
+            <motion.div
               key={s.label}
+              variants={{
+                hidden: { opacity: 0, y: 20, scale: 0.9 },
+                show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
+              }}
               className="flex flex-col items-center text-center lg:border-r last:border-r-0 border-charcoal/20"
             >
-              <span className="font-display font-extrabold text-4xl lg:text-5xl text-charcoal leading-none">
+              <motion.span
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.2 }}
+                className="font-display font-extrabold text-4xl lg:text-5xl text-charcoal leading-none"
+              >
                 {s.value}
-              </span>
+              </motion.span>
               <span className="mt-2 font-display font-semibold uppercase tracking-[0.15em] text-[10px] lg:text-xs text-charcoal/70">
                 {s.label}
               </span>
-            </div>
+            </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

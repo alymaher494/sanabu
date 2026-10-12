@@ -8,6 +8,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { PROCESS_STEPS } from "@/lib/site-data";
+import { motion } from "framer-motion";
 
 const ICONS: Record<string, LucideIcon> = {
   ClipboardCheck,
@@ -20,7 +21,13 @@ export function Process() {
   return (
     <section id="ablauf" className="relative py-20 lg:py-28 bg-cream overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="max-w-3xl"
+        >
           <div className="flex items-center gap-3 mb-4">
             <span className="h-px w-10 bg-gold" />
             <span className="font-display font-semibold text-xs tracking-[0.3em] uppercase text-gold">
@@ -34,29 +41,46 @@ export function Process() {
             Keine Überraschungen, keine versteckten Kosten. Sie wissen jederzeit,
             wo Ihr Projekt steht und wer dafür verantwortlich ist.
           </p>
-        </div>
+        </motion.div>
 
         {/* Steps */}
-        <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-4 relative">
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={{
+            hidden: { opacity: 0 },
+            show: { transition: { staggerChildren: 0.12 } },
+          }}
+          className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-4 relative"
+        >
           {/* horizontal connecting line on large screens */}
           <div className="hidden lg:block absolute top-9 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" aria-hidden />
 
           {PROCESS_STEPS.map((s) => {
             const Icon = ICONS[s.icon] ?? ClipboardCheck;
             return (
-              <div
+              <motion.div
                 key={s.step}
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+                }}
                 className="relative flex flex-col items-start group"
               >
                 {/* Step circle */}
-                <div className="relative z-10 mb-5">
+                <motion.div
+                  whileHover={{ scale: 1.08, backgroundColor: "#d4a017" }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  className="relative z-10 mb-5"
+                >
                   <div className="flex h-18 w-18 items-center justify-center h-[72px] w-[72px] bg-white border-2 border-gold group-hover:bg-gold transition-colors duration-300 shadow-[0_8px_24px_-12px_rgba(212,160,23,0.5)]">
                     <Icon className="h-8 w-8 text-gold group-hover:text-charcoal transition-colors" strokeWidth={1.75} />
                   </div>
                   <span className="absolute -top-2 -right-2 flex h-8 w-8 items-center justify-center bg-charcoal text-gold text-xs font-display font-extrabold tracking-wider border border-gold/40">
                     {s.step}
                   </span>
-                </div>
+                </motion.div>
 
                 <h3 className="font-display font-bold uppercase tracking-wide text-charcoal text-lg leading-tight">
                   {s.title}
@@ -64,10 +88,10 @@ export function Process() {
                 <p className="mt-2 text-sm text-charcoal/70 leading-relaxed">
                   {s.text}
                 </p>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

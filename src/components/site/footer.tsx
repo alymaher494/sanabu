@@ -19,9 +19,9 @@ export function SiteFooter() {
             <Image
               src="/images/logo.png"
               alt="Sam Bau"
-              width={200}
-              height={60}
-              className="h-16 w-auto filter brightness-0 invert"
+              width={300}
+              height={90}
+              className="h-30 w-auto filter brightness-0 invert"
             />
             <p className="mt-5 text-sm text-cream/65 leading-relaxed max-w-xs">
               Ihr verlässlicher Partner für Sanierung, Abbruch und

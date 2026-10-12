@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight, Phone, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { COMPANY } from "@/lib/site-data";
+import { motion } from "framer-motion";
 
 export function Hero() {
   return (
@@ -12,8 +13,11 @@ export function Hero() {
       className="relative min-h-screen flex items-center overflow-hidden bg-concrete-noise"
     >
       {/* Background image with dark overlay */}
-      <div
-        className="absolute inset-0 bg-cover bg-center animate-slow-zoom"
+      <motion.div
+        initial={{ scale: 1 }}
+        animate={{ scale: 1.08 }}
+        transition={{ duration: 20, ease: "linear" }}
+        className="absolute inset-0 bg-cover bg-center"
         style={{
           backgroundImage:
             "linear-gradient(105deg, rgba(26,26,26,0.95) 0%, rgba(26,26,26,0.78) 45%, rgba(26,26,26,0.45) 100%), url('/images/hero-bg.png')",
@@ -33,42 +37,77 @@ export function Hero() {
 
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-32 pb-20 md:pt-28 md:pb-24 w-full">
-        <div className="max-w-3xl">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="max-w-3xl"
+        >
           {/* Eyebrow */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 border border-gold/40 rounded-full bg-charcoal/60 backdrop-blur-sm">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 border border-gold/40 rounded-full bg-charcoal/60 backdrop-blur-sm"
+          >
             <span className="h-1.5 w-1.5 rounded-full bg-gold animate-pulse" />
             <span className="text-[11px] font-display font-semibold tracking-[0.25em] uppercase text-gold">
               Bauunternehmen · {COMPANY.region}
             </span>
-          </div>
+          </motion.div>
 
           {/* Big headline */}
-          <h1 className="font-display font-extrabold uppercase tracking-tight text-cream leading-[0.95] text-5xl sm:text-6xl lg:text-7xl xl:text-8xl">
+          <motion.h1
+            initial={{ opacity: 0, y: 20, scale: 1.02 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+            className="font-display font-extrabold uppercase tracking-tight text-cream leading-[0.95] text-5xl sm:text-6xl lg:text-7xl xl:text-8xl"
+          >
             Sam <span className="text-gold">Bau</span>
-          </h1>
+          </motion.h1>
 
           {/* Service line */}
-          <div className="mt-5 flex items-center gap-3">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="mt-5 flex items-center gap-3"
+          >
             <span className="hidden sm:block h-px w-12 bg-gold" />
             <p className="font-display font-semibold tracking-[0.22em] uppercase text-base sm:text-lg text-cream">
               Sanierung <span className="text-gold">|</span> Renovierung
             </p>
-          </div>
+          </motion.div>
 
           {/* Tagline */}
-          <p className="mt-6 font-display text-2xl sm:text-3xl lg:text-4xl font-light text-cream/95 text-balance">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="mt-6 font-display text-2xl sm:text-3xl lg:text-4xl font-light text-cream/95 text-balance"
+          >
             Ihr Haus – <span className="text-gold font-semibold">unsere Sorge.</span>
-          </p>
+          </motion.p>
 
           {/* Subtitle */}
-          <p className="mt-6 max-w-xl text-base sm:text-lg text-cream/85 leading-relaxed">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="mt-6 max-w-xl text-base sm:text-lg text-cream/85 leading-relaxed"
+          >
             Wir übernehmen anspruchsvolle Arbeiten vom kontrollierten Rückbau
             bis zur fertigen Renovierung – sauber geplant, zuverlässig
             ausgeführt, mit nur einem Ansprechpartner.
-          </p>
+          </motion.p>
 
           {/* CTAs */}
-          <div className="mt-9 flex flex-col sm:flex-row gap-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="mt-9 flex flex-col sm:flex-row gap-4"
+          >
             <Button
               asChild
               size="lg"
@@ -89,10 +128,15 @@ export function Hero() {
                 Leistungen ansehen
               </Link>
             </Button>
-          </div>
+          </motion.div>
 
           {/* Quick contact line */}
-          <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-cream/70">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.7 }}
+            className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-cream/70"
+          >
             <a
               href={COMPANY.phoneHref}
               className="flex items-center gap-2 hover:text-gold transition-colors"
@@ -107,12 +151,17 @@ export function Hero() {
               <Star className="h-4 w-4 text-gold fill-gold" />
               Festpreis-Angebote · regionale Verwurzelung
             </span>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
 
       {/* Scalloped "Alles aus einer Hand" seal badge */}
-      <div className="hidden xl:flex absolute right-12 bottom-16 z-10 items-center justify-center drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)]">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
+        animate={{ opacity: 1, scale: 1, rotate: 0 }}
+        transition={{ duration: 0.8, delay: 1, type: "spring", stiffness: 100, damping: 15 }}
+        className="hidden xl:flex absolute right-12 bottom-16 z-10 items-center justify-center drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)]"
+      >
         <div className="relative w-44 h-44">
           <svg viewBox="0 0 200 200" className="absolute inset-0 w-full h-full animate-slow-zoom">
             <defs>
@@ -145,15 +194,24 @@ export function Hero() {
             </span>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Scroll cue */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 hidden md:flex flex-col items-center gap-2 text-cream/50">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 1.2 }}
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 hidden md:flex flex-col items-center gap-2 text-cream/50"
+      >
         <span className="text-[10px] font-display tracking-[0.3em] uppercase">
           Scrollen
         </span>
-        <div className="h-10 w-px bg-gradient-to-b from-gold to-transparent" />
-      </div>
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          className="h-10 w-px bg-gradient-to-b from-gold to-transparent"
+        />
+      </motion.div>
     </section>
   );
 }

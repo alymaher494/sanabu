@@ -11,6 +11,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { SERVICES, type Service } from "@/lib/site-data";
+import { motion } from "framer-motion";
 
 const ICONS: Record<string, LucideIcon> = {
   Hammer,
@@ -23,9 +24,12 @@ const ICONS: Record<string, LucideIcon> = {
 function ServiceCard({ service, index }: { service: Service; index: number }) {
   const Icon = ICONS[service.icon] ?? Hammer;
   return (
-    <article
+    <motion.article
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.08, ease: "easeOut" }}
       className="group relative flex flex-col bg-white border border-[#e7e2d6] hover:border-gold transition-all duration-300 hover:shadow-[0_24px_48px_-24px_rgba(26,26,26,0.25)] overflow-hidden"
-      style={{ animationDelay: `${index * 80}ms` }}
+      whileHover={{ y: -4, boxShadow: "0 24px 48px -24px rgba(26,26,26,0.25)" }}
     >
       {/* Gold accent top bar */}
       <div className="h-1 bg-gold w-0 group-hover:w-full transition-all duration-500" />
@@ -121,9 +125,18 @@ export function Services() {
 
         {/* Services grid */}
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {SERVICES.map((s, i) => (
-            <ServiceCard key={s.id} service={s} index={i} />
-          ))}
+          <motion.div
+            initial="hidden"
+            animate="show"
+            variants={{
+              hidden: { opacity: 0 },
+              show: { transition: { staggerChildren: 0.08 } },
+            }}
+          >
+            {SERVICES.map((s, i) => (
+              <ServiceCard key={s.id} service={s} index={i} />
+            ))}
+          </motion.div>
 
           {/* CTA card filling the 6th slot */}
           <div className="relative flex flex-col justify-between p-6 lg:p-7 bg-charcoal text-cream overflow-hidden clip-corner-tr">

@@ -76,9 +76,9 @@ export function SiteHeader() {
             <Image
               src="/images/logo.png"
               alt="Sam Bau"
-              width={200}
-              height={60}
-              className="h-16 w-auto"
+              width={300}
+              height={90}
+              className="h-30 w-auto"
             />
           </Link>
 
@@ -138,9 +138,9 @@ export function SiteHeader() {
                   <Image
                     src="/images/logo.png"
                     alt="Sam Bau"
-                    width={200}
-                    height={60}
-                    className="h-12 w-auto"
+                    width={300}
+                    height={90}
+                    className="h-20 w-auto"
                   />
                   <SheetClose asChild>
                     <Button

@@ -1,122 +1,78 @@
 import { NextResponse } from "next/server";
-import { z } from "zod";
-import { db } from "@/lib/db";
+import {
+  createRateLimiter,
+  decideContactGet,
+  decideContactPost,
+  sendLeadEmail,
+  type ContactResult,
+} from "@/lib/contact";
 
-const schema = z.object({
-  name: z
-    .string()
-    .trim()
-    .min(2, "Name zu kurz")
-    .max(100, "Name zu lang"),
-  email: z
-    .string()
-    .trim()
-    .min(1, "E-Mail erforderlich")
-    .email("Ungültige E-Mail-Adresse")
-    .max(150, "E-Mail zu lang"),
-  phone: z
-    .string()
-    .trim()
-    .min(6, "Telefonnummer zu kurz")
-    .max(40, "Telefonnummer zu lang")
-    .regex(/^[0-9+()\-\s/]+$/, "Ungültige Zeichen in der Telefonnummer"),
-  service: z
-    .string()
-    .trim()
-    .min(1, "Leistungsbereich erforderlich")
-    .max(120, "Leistungsbereich zu lang"),
-  message: z
-    .string()
-    .trim()
-    .min(10, "Nachricht zu kurz")
-    .max(2000, "Nachricht zu lang"),
-  consent: z.boolean().refine((v) => v === true, "Zustimmung erforderlich"),
-});
+/**
+ * POST /api/contact — public lead-capture endpoint.
+ *
+ * Architecture (Vercel, no database):
+ *   Browser → POST /api/contact → Zod validation → anti-spam
+ *   → transactional email (Resend) → business owner.
+ *
+ * Submitted PII is never stored locally and never logged.
+ * All provider calls happen server-side. Decision logic lives in
+ * `@/lib/contact` and is covered by `tests/contact-api.test.mjs`.
+ */
 
-// Simple in-memory rate limiting per IP (per container lifecycle).
-const WINDOW_MS = 60_000;
-const MAX_PER_WINDOW = 5;
-const hits = new Map<string, { count: number; first: number }>();
+const limiter = createRateLimiter();
 
-function rateLimited(ip: string) {
-  const now = Date.now();
-  const entry = hits.get(ip);
-  if (!entry || now - entry.first > WINDOW_MS) {
-    hits.set(ip, { count: 1, first: now });
-    return false;
-  }
-  entry.count += 1;
-  return entry.count > MAX_PER_WINDOW;
+function toResponse(result: ContactResult): NextResponse {
+  return NextResponse.json(result.json, {
+    status: result.status,
+    headers: result.headers,
+  });
 }
 
-function getClientIp(req: Request) {
+/**
+ * Client IP for abuse accounting only (never trusted for authorization).
+ * Prefers `x-real-ip` (set by the hosting edge), falls back to the first
+ * `x-forwarded-for` entry. Both are client-influenced — the honeypot field
+ * carries the main anti-bot weight, and the in-memory limiter is a
+ * per-instance best-effort on serverless (see module docs).
+ */
+function getClientIp(req: Request): string {
+  const realIp = req.headers.get("x-real-ip")?.trim();
+  if (realIp) return realIp;
   const fwd = req.headers.get("x-forwarded-for");
-  if (fwd) return fwd.split(",")[0]!.trim();
-  return req.headers.get("x-real-ip") ?? "unknown";
+  if (fwd) {
+    const first = fwd.split(",")[0]?.trim();
+    if (first) return first;
+  }
+  return "unknown";
 }
 
 export async function POST(req: Request) {
   const ip = getClientIp(req);
-  if (rateLimited(ip)) {
-    return NextResponse.json(
-      { error: "Zu viele Anfragen. Bitte versuchen Sie es in einer Minute erneut." },
-      { status: 429 }
-    );
-  }
 
-  let body: unknown;
+  let body: unknown = null;
+  let bodyParseable = false;
   try {
     body = await req.json();
+    bodyParseable = true;
   } catch {
-    return NextResponse.json(
-      { error: "Ungültige Anfrage." },
-      { status: 400 }
-    );
+    bodyParseable = false;
   }
 
-  const parsed = schema.safeParse(body);
-  if (!parsed.success) {
-    const firstError = parsed.error.issues[0]?.message ?? "Ungültige Eingaben.";
-    return NextResponse.json(
-      { error: firstError, fieldErrors: parsed.error.flatten().fieldErrors },
-      { status: 422 }
-    );
-  }
-
-  const { name, email, phone, service, message, consent } = parsed.data;
-
-  try {
-    await db.contactRequest.create({
-      data: {
-        name,
-        email,
-        phone,
-        service,
-        message,
-        consent,
-        status: "new",
-      },
-    });
-
-    return NextResponse.json(
-      {
-        success: true,
-        message: "Anfrage empfangen. Wir melden uns innerhalb von 24 Stunden.",
-      },
-      { status: 201 }
-    );
-  } catch (err) {
-    console.error("[contact] DB error:", err);
-    return NextResponse.json(
-      { error: "Beim Speichern ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut." },
-      { status: 500 }
-    );
-  }
+  const result = await decideContactPost({
+    body,
+    bodyParseable,
+    ip,
+    limiter,
+    send: (data) =>
+      sendLeadEmail(data, {
+        apiKey: process.env.RESEND_API_KEY,
+        to: process.env.CONTACT_EMAIL_TO,
+        from: process.env.EMAIL_FROM,
+      }),
+  });
+  return toResponse(result);
 }
 
 export async function GET() {
-  return NextResponse.json(
-    { error: "Method not allowed." },
-    { status: 405, headers: { Allow: "POST" } }
-  );
+  return toResponse(decideContactGet());
 }

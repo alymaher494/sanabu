@@ -5,7 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { SiteHeader } from "@/components/site/header";
 import { SiteFooter } from "@/components/site/footer";
 import { LocalBusinessJsonLd } from "@/components/site/json-ld";
-import { COMPANY, SITE_URL } from "@/lib/site-data";
+import { SITE_URL } from "@/lib/site-data";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -115,9 +115,15 @@ export default function RootLayout({
       <body
         className={`${montserrat.variable} ${openSans.variable} antialiased bg-background text-foreground`}
       >
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[60] focus:bg-gold focus:text-charcoal focus:px-4 focus:py-2 focus:font-display focus:font-bold focus:uppercase focus:text-xs focus:tracking-wider"
+        >
+          Zum Inhalt springen
+        </a>
         <div className="flex min-h-screen flex-col bg-cream">
           <SiteHeader />
-          <main className="flex-1">{children}</main>
+          <main id="main-content" className="flex-1">{children}</main>
           <SiteFooter />
         </div>
         <Toaster />

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Phone, Mail, MapPin, ArrowUp } from "lucide-react";
-import { SamBauLogo } from "@/components/sam-bau-logo";
+import Image from "next/image";
 import { COMPANY, NAV_LINKS, SERVICES } from "@/lib/site-data";
 
 export function SiteFooter() {
@@ -16,7 +16,13 @@ export function SiteFooter() {
         <div className="grid gap-10 lg:gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <SamBauLogo variant="dark" showTagline />
+            <Image
+              src="/images/logo.png"
+              alt="Sam Bau"
+              width={200}
+              height={60}
+              className="h-16 w-auto filter brightness-0 invert"
+            />
             <p className="mt-5 text-sm text-cream/65 leading-relaxed max-w-xs">
               Ihr verlässlicher Partner für Sanierung, Abbruch und
               Wiederherstellung in {COMPANY.city} und dem Rhein-Main-Gebiet.

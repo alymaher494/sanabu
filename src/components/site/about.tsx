@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { ShieldCheck, Clock, Users } from "lucide-react";
 import { COMPANY } from "@/lib/site-data";
 
@@ -15,11 +16,13 @@ export function About() {
           <div className="relative order-2 lg:order-1">
             <div className="relative">
               {/* main image with clip */}
-              <div className="relative overflow-hidden clip-corner-tr border border-[#e7e2d6] shadow-[0_24px_48px_-24px_rgba(26,26,26,0.35)]">
-                <img
+              <div className="relative overflow-hidden clip-corner-tr border border-[#e7e2d6] shadow-[0_24px_48px_-24px_rgba(26,26,26,0.35)] h-[420px] lg:h-[540px]">
+                <Image
                   src="/images/about.png"
                   alt="Sam Bau Handwerker bei der Arbeit – professionelle Sanierung und Renovierung"
-                  className="w-full h-[420px] lg:h-[540px] object-cover"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-charcoal/30 via-transparent to-transparent" />

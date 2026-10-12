@@ -27,8 +27,13 @@ import {
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { COMPANY, SERVICES } from "@/lib/site-data";
+import { contactSchema } from "@/lib/contact";
 
-const schema = z.object({
+/**
+ * Client-side schema: same rules as the server (single source of truth),
+ * with user-friendly messages for the visible fields.
+ */
+const schema = contactSchema.extend({
   name: z.string().min(2, "Bitte geben Sie Ihren Namen ein (min. 2 Zeichen)."),
   email: z
     .string()
@@ -47,7 +52,7 @@ const schema = z.object({
   }),
 });
 
-type FormValues = z.infer<typeof schema>;
+type FormValues = z.input<typeof schema>;
 
 const CONTACT_ITEMS: {
   icon: LucideIcon;
@@ -83,6 +88,8 @@ export function Contact() {
   const { toast } = useToast();
   const [submitted, setSubmitted] = useState(false);
 
+  const [formStartedAt] = useState(() => Date.now());
+
   const {
     register,
     handleSubmit,
@@ -99,6 +106,8 @@ export function Contact() {
       service: "",
       message: "",
       consent: false,
+      website: "",
+      startedAt: formStartedAt,
     },
   });
 
@@ -229,12 +238,14 @@ export function Contact() {
                       <Input
                         id="name"
                         placeholder="Max Mustermann"
+                        autoComplete="name"
                         className="bg-white border-[#e7e2d6] focus-visible:ring-gold focus-visible:border-gold h-11"
                         {...register("name")}
                         aria-invalid={!!errors.name}
+                        aria-describedby={errors.name ? "name-error" : undefined}
                       />
                       {errors.name && (
-                        <p className="text-xs text-destructive">{errors.name.message}</p>
+                        <p id="name-error" role="alert" className="text-xs text-destructive">{errors.name.message}</p>
                       )}
                     </div>
                     <div className="space-y-2">
@@ -245,12 +256,14 @@ export function Contact() {
                         id="email"
                         type="email"
                         placeholder="max@beispiel.de"
+                        autoComplete="email"
                         className="bg-white border-[#e7e2d6] focus-visible:ring-gold focus-visible:border-gold h-11"
                         {...register("email")}
                         aria-invalid={!!errors.email}
+                        aria-describedby={errors.email ? "email-error" : undefined}
                       />
                       {errors.email && (
-                        <p className="text-xs text-destructive">{errors.email.message}</p>
+                        <p id="email-error" role="alert" className="text-xs text-destructive">{errors.email.message}</p>
                       )}
                     </div>
                   </div>
@@ -264,12 +277,14 @@ export function Contact() {
                         id="phone"
                         type="tel"
                         placeholder="01590 6510642"
+                        autoComplete="tel"
                         className="bg-white border-[#e7e2d6] focus-visible:ring-gold focus-visible:border-gold h-11"
                         {...register("phone")}
                         aria-invalid={!!errors.phone}
+                        aria-describedby={errors.phone ? "phone-error" : undefined}
                       />
                       {errors.phone && (
-                        <p className="text-xs text-destructive">{errors.phone.message}</p>
+                        <p id="phone-error" role="alert" className="text-xs text-destructive">{errors.phone.message}</p>
                       )}
                     </div>
                     <div className="space-y-2">
@@ -284,6 +299,7 @@ export function Contact() {
                           id="service"
                           className="bg-white border-[#e7e2d6] focus-visible:ring-gold focus-visible:border-gold h-11"
                           aria-invalid={!!errors.service}
+                          aria-describedby={errors.service ? "service-error" : undefined}
                         >
                           <SelectValue placeholder="Bitte wählen…" />
                         </SelectTrigger>
@@ -297,7 +313,7 @@ export function Contact() {
                         </SelectContent>
                       </Select>
                       {errors.service && (
-                        <p className="text-xs text-destructive">{errors.service.message}</p>
+                        <p id="service-error" role="alert" className="text-xs text-destructive">{errors.service.message}</p>
                       )}
                     </div>
                   </div>
@@ -313,26 +329,48 @@ export function Contact() {
                       className="bg-white border-[#e7e2d6] focus-visible:ring-gold focus-visible:border-gold resize-y"
                       {...register("message")}
                       aria-invalid={!!errors.message}
+                      aria-describedby={errors.message ? "message-error" : undefined}
                     />
                     {errors.message && (
-                      <p className="text-xs text-destructive">{errors.message.message}</p>
+                      <p id="message-error" role="alert" className="text-xs text-destructive">{errors.message.message}</p>
                     )}
+                  </div>
+
+                  {/* Honeypot: hidden from humans, filled by bots. */}
+                  <div className="absolute h-px w-px overflow-hidden whitespace-nowrap" style={{ clip: "rect(0 0 0 0)", clipPath: "inset(50%)" }} aria-hidden="true">
+                    <label htmlFor="website">
+                      Bitte lassen Sie dieses Feld leer.
+                      <input
+                        id="website"
+                        type="text"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        {...register("website")}
+                      />
+                    </label>
                   </div>
 
                   <label className="flex items-start gap-3 text-xs text-charcoal/70 cursor-pointer select-none">
                     <input
                       type="checkbox"
+                      id="consent"
                       className="mt-0.5 h-4 w-4 accent-[#d4a017]"
                       {...register("consent")}
+                      aria-invalid={!!errors.consent}
+                      aria-describedby={errors.consent ? "consent-error" : undefined}
                     />
                     <span>
-                      Ich habe die Datenschutzerklärung gelesen und stimme zu,
-                      dass meine Angaben zur Bearbeitung meiner Anfrage
-                      gespeichert werden.
+                      Ich habe die{" "}
+                      <a href="/datenschutz" className="underline underline-offset-2 hover:text-charcoal">
+                        Datenschutzerklärung
+                      </a>{" "}
+                      gelesen und bin damit einverstanden, dass meine Angaben
+                      zur Bearbeitung meiner Anfrage per E-Mail an Sam Bau
+                      übermittelt werden.
                     </span>
                   </label>
                   {errors.consent && (
-                    <p className="text-xs text-destructive -mt-3">{errors.consent.message}</p>
+                    <p id="consent-error" role="alert" className="text-xs text-destructive -mt-3">{errors.consent.message}</p>
                   )}
 
                   <Button

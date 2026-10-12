@@ -58,9 +58,10 @@ export default function DatenschutzPage() {
                 Angaben aus dem Formular inklusive der von Ihnen dort
                 angegebenen Kontaktdaten (Name, E-Mail, Telefon, gewählter
                 Leistungsbereich und Ihre Nachricht) zwecks Bearbeitung der
-                Anfrage und für den Fall von Anschlussfragen bei uns
-                gespeichert. Diese Daten geben wir nicht ohne Ihre
-                Einwilligung weiter.
+                Anfrage per E-Mail an uns übermittelt und im Rahmen der
+                üblichen Geschäftskorrespondenz verarbeitet. Es erfolgt keine
+                Speicherung in einer Website-Datenbank. Diese Daten geben wir
+                nicht ohne Ihre Einwilligung weiter.
               </p>
               <p className="leading-relaxed mt-3">
                 Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6
@@ -73,12 +74,12 @@ export default function DatenschutzPage() {
                 lit. a DSGVO), sofern diese abgegeben wurde.
               </p>
               <p className="leading-relaxed mt-3">
-                Die von Ihnen im Kontaktformular gemachten Angaben verbleiben
-                bei uns, bis Sie uns zur Löschung auffordern, Sie Ihre
-                Einwilligung zur Speicherung widerrufen oder der Zweck der
-                Datenspeicherung entfällt (z. B. nach abgeschlossener
-                Bearbeitung Ihrer Anfrage). Zwingende gesetzliche
-                Aufbewahrungsfristen bleiben unberührt.
+                Die per Kontaktformular übermittelten Angaben verbleiben im
+                Rahmen unserer Geschäftskorrespondenz bei uns, bis Sie uns
+                zur Löschung auffordern, Sie Ihre Einwilligung widerrufen
+                oder der Zweck der Speicherung entfällt (z. B. nach
+                abgeschlossener Bearbeitung Ihrer Anfrage). Zwingende
+                gesetzliche Aufbewahrungsfristen bleiben unberührt.
               </p>
             </div>
 

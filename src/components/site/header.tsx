@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
-import { SamBauLogo } from "@/components/sam-bau-logo";
+import Image from "next/image";
 import { NAV_LINKS, COMPANY } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
@@ -18,7 +18,6 @@ export function SiteHeader() {
   // Home page has a full-screen dark hero -> transparent header at top.
   // All other (inner) pages start with a dark PageHero too, so transparent header
   // is fine everywhere at the top. Once scrolled, header gets the cream background.
-  const isHome = pathname === "/";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -74,7 +73,13 @@ export function SiteHeader() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <Link href="/" aria-label="Sam Bau Startseite">
-            <SamBauLogo variant={scrolled ? "dark" : "light"} />
+            <Image
+              src="/images/logo.png"
+              alt="Sam Bau"
+              width={200}
+              height={60}
+              className="h-16 w-auto"
+            />
           </Link>
 
           {/* Desktop nav */}
@@ -130,7 +135,13 @@ export function SiteHeader() {
                 className="w-full max-w-sm bg-charcoal text-cream border-l-2 border-gold p-0"
               >
                 <div className="flex items-center justify-between h-20 px-6 border-b border-white/10">
-                  <SamBauLogo variant="dark" />
+                  <Image
+                    src="/images/logo.png"
+                    alt="Sam Bau"
+                    width={200}
+                    height={60}
+                    className="h-12 w-auto"
+                  />
                   <SheetClose asChild>
                     <Button
                       variant="ghost"

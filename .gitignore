@@ -30,8 +30,11 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
+# env files — NEVER commit real credentials (see .env.example for names only)
+.env
+.env*.local
+.env*.development
+.env*.production
 
 # vercel
 .vercel
@@ -50,5 +53,13 @@ test
 prompt
 
 server.log
+
+# local databases — never commit (production uses no local DB)
+*.db
+*.db-journal
+*.sqlite
+*.sqlite-journal
+/db/
+
 # Skills directory
 /skills/

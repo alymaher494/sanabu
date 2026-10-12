@@ -282,3 +282,12 @@
 html, body {
   min-height: 100%;
 }
+
+/* Respect users who prefer reduced motion: disable decorative animation. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-slow-zoom,
+  .animate-marquee,
+  .animate-fade-up {
+    animation: none;
+  }
+}

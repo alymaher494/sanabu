@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import {
   Hammer,
   Pickaxe,
@@ -34,11 +35,13 @@ export function ServiceDetail({ service, index }: ServiceDetailProps) {
         {/* Image */}
         <div className={flipped ? "lg:order-2" : "lg:order-1"}>
           <div className="relative">
-            <div className="relative overflow-hidden clip-corner-tr border border-[#e7e2d6] shadow-[0_24px_48px_-24px_rgba(26,26,26,0.35)]">
-              <img
+            <div className="relative overflow-hidden clip-corner-tr border border-[#e7e2d6] shadow-[0_24px_48px_-24px_rgba(26,26,26,0.35)] h-[300px] sm:h-[380px] lg:h-[440px]">
+              <Image
                 src={service.image}
                 alt={`${service.title} – Sam Bau`}
-                className="w-full h-[300px] sm:h-[380px] lg:h-[440px] object-cover"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 via-transparent to-transparent" />

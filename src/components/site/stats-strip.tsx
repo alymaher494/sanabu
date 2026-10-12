@@ -15,7 +15,7 @@ export function StatsStrip() {
       />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-14">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4">
-          {STATS.map((s, i) => (
+          {STATS.map((s) => (
             <div
               key={s.label}
               className="flex flex-col items-center text-center lg:border-r last:border-r-0 border-charcoal/20"

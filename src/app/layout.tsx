@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { SiteHeader } from "@/components/site/header";
 import { SiteFooter } from "@/components/site/footer";
 import { LocalBusinessJsonLd } from "@/components/site/json-ld";
+import { WhatsAppFloat } from "@/components/ui/whatsapp-float";
 import { SITE_URL } from "@/lib/site-data";
 
 const montserrat = Montserrat({
@@ -126,6 +127,7 @@ export default function RootLayout({
           <main id="main-content" className="flex-1">{children}</main>
           <SiteFooter />
         </div>
+        <WhatsAppFloat />
         <Toaster />
       </body>
     </html>
